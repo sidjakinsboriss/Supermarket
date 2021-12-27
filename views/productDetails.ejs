@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .layout {
+            position: relative;
+            /* width: 600px;
+            height: 500px; */
+            top: 0;
+            left: 0;
+        }
+
+        .pointer {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+    <title>
+        <%= product.name %> Details
+    </title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/home">ReThink</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <% if(currentUser) { %>
+                        <a class="nav-link" href="/shopper/products">Products</a>
+                        <% } else { %>
+                            <a class="nav-link" href="/products">Products</a>
+                            <% } %>
+                </li>
+                <% if(currentUser) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shopper/scanner">Scan</a>
+                    </li>
+                    <% } %>
+
+            </ul>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+
+                    <% if(currentUser) {%>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/shopper/logout">Log Out</a>
+
+                        </li>
+                        <% } else { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/shopper/login">Log In As Shopper</a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/employee/login">Log In As Employee</a>
+                            </li>
+                            <% } %>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container d-flex justify-content-center mt-3">
+        <div class="row">
+            <div class="col">
+                <div style="position: relative; left: 0; top: 0;" class="mx-3">
+                    <img src="https://i.pinimg.com/originals/78/a1/65/78a165f3db1121f23fe4524f40da2608.png"
+                        class="layout my-3" id="layout" />
+                    <img src="https://toppng.com/uploads/preview/store-locator-locate-pin-115634817117wieanntof.png"
+                        class="pointer" id="pointer" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("pointer").style.top = `<%- product.top %>px`
+        document.getElementById("pointer").style.left = `<%- product.left %>px`
+    </script>
+</body>
+
+</html>

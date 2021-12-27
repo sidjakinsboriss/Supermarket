@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Products Available for Order</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/employee/home">ReThink</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/stock">Stock <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/supplier/products">Supplier</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/statistics">Statistics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/deliveries">Deliveries</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/makeorder">Order</a>
+        </li>
+
+      </ul>
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+          <% if(!currentUser) {%>
+            <li class="nav-item">
+              <a class="nav-link" href="/employee/login">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/employee/register">Register</a>
+            </li>
+            <% } else {%>
+              <li class="nav-item">
+                <a class="nav-link" href="/employee/logout">Log Out</a>
+              </li>
+              <% } %>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <table class="table table-info table-hover mt-3 text-center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price, <span>&#8364;</span></th>
+        <th scope="col">vat_rate</th>
+        <th scope="col">id</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% let i=1 %>
+        <% for (let prod of products) { %>
+          <tr>
+            <th scope="row">
+              <%= i %>
+            </th>
+            <td>
+              <%= prod.name %>
+            </td>
+            <td>
+              <%= prod.price_in_cents / 100%>
+            </td>
+            <td>
+              <%= prod.vat_rate %>
+            </td>
+            <td>
+              <%= prod.id %>
+            </td>
+          </tr>
+          <% i++ %>
+            <% } %>
+    </tbody>
+  </table>
+  <script>
+    const products = { features: <% -JSON.stringify(products) %>}
+  </script>
+</body>
+
+</html>

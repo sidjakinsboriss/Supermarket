@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/home.css">
+    <title>Scanner</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">ReThink</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/shopper/products">Products</a>
+                </li>
+                <% if(currentUser) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shopper/scanner">Scan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shopper/wishlist">Wishlist</a>
+                    </li>
+                    <% } %>
+            </ul>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <% if(!currentUser) {%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/shopper/login">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/shopper/register">Register</a>
+                        </li>
+                        <% } else {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/shopper/logout">Log Out</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/shopper/cart"><i class="fa fa-shopping-cart"></i></a>
+                            </li>
+                            <% } %>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <div class="mt-3" id="qr-reader" style="width:600px"></div>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="qr-reader-results"></div> -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/scanner.js">
+    </script>
+</body>
+
+
+</html>

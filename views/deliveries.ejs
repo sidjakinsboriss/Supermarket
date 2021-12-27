@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Deliveries</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/employee/home">ReThink</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/stock">Stock <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/supplier/products">Supplier</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/statistics">Statistics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/deliveries">Deliveries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/makeorder">Order</a>
+                </li>
+
+            </ul>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <% if(!currentUser) {%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/employee/login">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/employee/register">Register</a>
+                        </li>
+                        <% } else {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/employee/logout">Log Out</a>
+                            </li>
+                            <% } %>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <table class="table table-info table-hover mt-3 text-center">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Products</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let i=1 %>
+                <% for (let del of deliveries) { %>
+                    <tr>
+                        <th scope="row">
+                            <%= i %>
+                        </th>
+                        <td>
+                            <%= del.date_time.slice(0,10) %>
+                        </td>
+                        <td>
+                            <%= del.date_time.slice(11,16) %>
+                        </td>
+                        <td>
+                            <ul>
+                                <% for (let j=0; j < del.products.length; j++) { %>
+
+                                    <li>
+                                        <%= del.products[j].name %>, <%= del.amounts[j] %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                        </td>
+                    </tr>
+                    <% i++ %>
+                        <% } %>
+        </tbody>
+    </table>
+</body>
+
+</html>
