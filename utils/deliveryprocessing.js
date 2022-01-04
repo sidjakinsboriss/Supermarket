@@ -8,7 +8,8 @@ async function processDelivery() {
     const date = new Date()
     for (let delivery of deliveries) {
         if (date.getFullYear > parseInt(delivery.date_time.slice(0, 4)) ||
-            (date.getMonth() > parseInt(delivery.date_time.slice(5, 7)) && date.getDate() > parseInt(delivery.date_time.slice(8, 10)))) {
+            (date.getMonth() > parseInt(delivery.date_time.slice(5, 7)) && date.getDate() > parseInt(delivery.date_time.slice(8, 10))
+                && date.getHours > parseInt(delivery.date_time.slice(11, 13)) && date.getMinutes > parseInt(delivery.date_time.slice(14, 16)))) {
             console.log("PROCESSING")
             for (let i = 0; i < delivery.products.length; i++) {
                 let product = delivery.products[i]
@@ -16,6 +17,8 @@ async function processDelivery() {
                 await invProduct.save()
             }
             await Delivery.findByIdAndDelete({ _id: delivery._id })
+        } else {
+            console.log("HAS NOT ARRIVED")
         }
     }
 
