@@ -16,6 +16,17 @@ const bodyParser = require('body-parser')
 const employee = require('./routes/employee')
 const shopper = require('./routes/shopper')
 
+const processing = require('./utils/deliveryprocessing')
+
+//Constantly checks if any delivery should be processed
+setInterval(async function process() {
+    return new Promise(async (resolve, reject) => {
+        await processing.processDelivery().then(async () => {
+            resolve()
+        })
+    })
+}, 10000)
+
 const MongoDBStore = require("connect-mongo");
 
 //Connecting mongoose to MongoDB
