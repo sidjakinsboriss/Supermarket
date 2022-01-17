@@ -28,6 +28,7 @@ const seedDB = async () => {
     await Manager.deleteMany({})
     await InventoryProduct.deleteMany({})
     await Delivery.deleteMany({})
+    await Wishlist.deleteMany({})
 
     for (let i = 0; i < 8; i++) {
         try {
