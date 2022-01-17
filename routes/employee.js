@@ -118,9 +118,14 @@ router.get('/makeorder', async (req, res) => {
 router.post('/makeorder', async (req, res) => {
     const { products } = req.body
     const toOrder = []
-    for (let prod of products)
-        toOrder.push(JSON.parse(prod))
-    console.log(toOrder)
+    if (Array.isArray(products)) {
+        for (let prod of products) {
+            console.log(JSON.parse(prod))
+            toOrder.push(JSON.parse(prod))
+        }
+    } else {
+        toOrder.push(JSON.parse(products))
+    }
     await supplier.getDelivery(toOrder)
     for (let product of toOrder) {
         let invProduct = await InventoryProduct.findByIdAndUpdate({ _id: product._id }, {

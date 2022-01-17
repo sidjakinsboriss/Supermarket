@@ -167,11 +167,12 @@ router.post('/deletefromwishlist', async (req, res) => {
 })
 
 //Checks if there is already a delivery expected with the product
-function existsDelivery(product, deliveries) {
+async function existsDelivery(product, deliveries) {
     for (let delivery of deliveries) {
-        for (let prod of delivery.products) {
 
-            if (JSON.stringify(prod) === JSON.stringify(product))
+        for (let prod of delivery.products) {
+            let prod1 = await Product.findOne({ name: prod.name })
+            if (JSON.stringify(prod1) === JSON.stringify(product))
                 return true
         }
     }

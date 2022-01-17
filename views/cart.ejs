@@ -69,7 +69,7 @@
                     <div class="card-body">
                         <h4 class="card-title">My Cart</h4>
                         <% if (cart !==null && cart.totalPrice !== 0) { %>
-                            <p>Total: <%= cart.totalPrice / 100 %>
+                            <p>Total: <%= cart.totalPrice / 100 %> <span>&#8364;</span>
                             </p>
                             <% } else { %>
                                 <p>There are no products in your cart yet!</p>
@@ -80,7 +80,7 @@
                         <ul class="list-group list-group-flush">
                             <% for (let product of cart.contents) {%>
                                 <li class="list-group-item">
-                                    <%= product.name %>, <%= product.price / 100 %>
+                                    <%= product.name %>, <%= product.price / 100 %> <span>&#8364;</span>
                                             <form action="/shopper/deletefromcart/" method="POST">
                                                 <input type="hidden" name="barcode" value="<%= product.barcode %>" />
                                                 <button class="btn btn-sm btn-danger">Delete</button>
