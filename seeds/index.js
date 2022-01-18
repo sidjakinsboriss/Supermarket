@@ -6,6 +6,7 @@ const ShoppingCart = require('../schemas/shoppingCart')
 const Manager = require('../schemas/manager')
 const InventoryProduct = require('../schemas/inventoryProduct')
 const Delivery = require('../schemas/delivery')
+const Wishlist = require('../schemas/wishlist')
 
 mongoose.connect('mongodb://localhost:27017/supermarket', {
     useNewUrlParser: true,

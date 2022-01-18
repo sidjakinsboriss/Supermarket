@@ -196,7 +196,8 @@ myEmitter.on('event', async (products) => {
         }, { new: true })
         await inventProd.save()
         const prod = await Product.findOne({ name: product.name })
-        if (inventProd.amount < 100 && !(existsDelivery(prod, deliveries))) {
+        let exists = await existsDelivery(prod, deliveries)
+        if (inventProd.amount < 100 && !exists) {
             //Update spent only if added to the delivery
             const inventProd1 = await InventoryProduct.findOneAndUpdate({ name: product.name }, {
                 $inc: {
